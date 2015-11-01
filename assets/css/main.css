@@ -2087,7 +2087,7 @@
 			}
 
 			.image.avatar img {
-				border-radius: 50%;
+				border-radius: 5px;
 				width: 100%;
 			}
 
