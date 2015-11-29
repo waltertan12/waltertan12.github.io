@@ -8,6 +8,12 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script type"text/javascript" 
           src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+  <style>
+    body {
+      font-family: "Varela Round";
+    }
+  </style>
 </head>
 <body>
   <div class="resume container">
@@ -22,12 +28,12 @@
         </a>
       </span>
       <br>
-      <span><strong>Email</strong>: 
+      <span><strong>Email</strong> 
         <a href="mailto:waltertan12@gmail.com">
           waltertan12@gmail.com
         </a>
       </span>
-      <span><strong>Phone</strong>: 
+      <span><strong>Phone</strong>
         616.406.6571
       </span>
       <br>
@@ -40,11 +46,16 @@
       <span>
         <a href="http://github.com/waltertan12">
           GitHub
-        </a>|&nbsp;
+        </a> |&nbsp;
       </span>
       <span>
         <a href="http://waltertan12.github.io">
           Portfolio
+        </a> |&nbsp;
+      </span>
+      <span>
+        <a href="http://waltertan12.github.io/blog">
+          Blog
         </a>
       </span>
     </div>
@@ -75,16 +86,18 @@
         <h2>Languages I've Used</h2>
         <ul>
           <li>Ruby</li>
-          <li>JavaScript</li>
-          <li>HTML / CSS</li>
-          <li>SQL</li>
+          <li>JavaScript (jQuery, JSX)</li>
+          <li>HTML (Erb)</li>
+          <li>CSS</li>
+          <li>SQL (PostgreSQL, SQLite)</li>
         </ul>
       </div>
       <div class="col-md-6">
         <h2>Frameworks I'm Familiar With</h2>
         <ul>
           <li>Ruby on Rails</li>
-          <li>React</li>
+          <li>Sinatra</li>
+          <li>React / Flux</li>
           <li>Sass</li>
           <li>Bootstrap</li>
         </ul>
@@ -326,6 +339,76 @@
         </div>
       </div>
     </div>
+
+    <div class="projects">
+      <h2>Initiatives</h2>
+      <hr>
+        <!-- Cornell CrossFit -->
+        <div className="panel-group" 
+           id="accordionThree" 
+           role="tablist" 
+           aria-multiselectable="true">
+          <div class="panel panel-default">
+            <a role="button" 
+               data-toggle="collapse" 
+               data-parent="#accordionThree" href="#collapseCornellCrossFit" 
+               aria-expanded="true" 
+               aria-controls="collapseCornellCrossFit">
+              <div class="panel-heading" role="tab" id="cornellCrossFit">
+                <h4 className="container panel-title">
+                  Cornell CrossFit Club
+                </h4>
+              </div>
+            </a>
+            <div id="collapseCornellCrossFit" 
+                 class="panel-collapse collapse" 
+                 role="tabpanel" 
+                 aria-labelledby="cornellCrossFit" 
+                 aria-expanded="true">
+              <div class="panel-body">
+                <h4>
+                  Co-Founder and Vice President | August 2012 - May 2013
+                </h4>
+                <ul>
+                  <li>Promoted the maintenance and improvement of fitness and nutrition using the function fitness phenomenon "CrossFit" as a guide</li>  
+                  <li>Scheduled and programmed workout content based on safe, efficient, results-based exercise</li> 
+                  <li>Expanded membership of the club using social networking and direct marketing</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        <!-- SEBA -->
+        <div class="panel panel-default">
+          <a role="button" 
+             data-toggle="collapse" 
+             data-parent="#accordionThree" href="#collapseSEBA" 
+             aria-expanded="true" 
+             aria-controls="collapseSEBA">
+            <div class="panel-heading" role="tab" id="SEBA">
+              <h4 className="container panel-title">
+                Cornell Science and Engineering Business Association
+              </h4>
+            </div>
+          </a>
+          <div id="collapseSEBA" 
+               class="panel-collapse collapse" 
+               role="tabpanel" 
+               aria-labelledby="SEBA" 
+               aria-expanded="true">
+            <div class="panel-body">
+              <h4>
+                Co-Founder and Vice President | May 2011 - May 2013
+              </h4>
+              <ul>
+                <li>Educated students with technical backgrounds for careers in business and management </li>  
+                <li>Designed the organization’s infrastructure and drafted its constitution and by-laws </li> 
+                <li>Planned events such as mock interviews, resume critiques, and elevator pitch workshops </li>
+                <li>Networked with over 3,000 students across campus by means of flyering, quarter carding, and connecting with professors and other student organizations</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
 
     <div class="hobbies">
       <h2>Hobbies</h2>
