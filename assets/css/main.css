@@ -9,8 +9,10 @@ div {
     transition-duration: 700ms;
     position: relative;
     right: 0;
+    visibility: visible;
 }
 .hidden {
+    visibility: hidden;
     position: relative;
     transition-duration: 700ms;
     right: 100%;
