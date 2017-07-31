@@ -1,8 +1,8 @@
 'use strict';
-var typePhrase = (id, phrase, pause) => {
+var typePhrase = function typePhrase(id, phrase, pause) {
     var element = document.getElementById(id);
 
-    return new Promise ((fulfill, reject) => {
+    return new Promise (function (fulfill, reject) {
         if (!element) reject();
         if (!pause) pause = 0;
 
@@ -12,10 +12,10 @@ var typePhrase = (id, phrase, pause) => {
 
         element.textContent = '|';
 
-        var _typePhrase = () => {
-            var humanize = Math.round(Math.random() * (150 - 30)) + 30;
+        var _typePhrase = function _typePhrase() {
+            var humanize = Math.round(Math.random() * (100 - 30)) + 30;
 
-            timeOut = setTimeout(() => {
+            timeOut = setTimeout(function () {
                 letter++;
                 var type = phrase.substring(0, letter);
                 element.textContent = type + '|';
@@ -25,7 +25,7 @@ var typePhrase = (id, phrase, pause) => {
                     // remove the '|'
                     element.textContent = element.textContent.slice(0, -1);
                     clearTimeout(timeOut);
-                    setTimeout(() => {
+                    setTimeout(function () {
                         return fulfill();
                     }, pause);
                 }
@@ -35,23 +35,25 @@ var typePhrase = (id, phrase, pause) => {
 
         _typePhrase();
     });
-},
-pauseSync = (wait) => {
-        if (typeof wait === 'undefined') {
-            var max = 750, min = 500; 
-            wait = Math.floor(Math.random() * (max - min + 1) + min);
-        }
+};
 
-        return wait;
-    },
-pauseAsync = (wait) => {
+var pauseSync = function pauseSync(wait) {
     if (typeof wait === 'undefined') {
         var max = 750, min = 500; 
         wait = Math.floor(Math.random() * (max - min + 1) + min);
     }
-    return new Promise((fulfill) => {
-        setTimeout(() => {
+
+   return wait;
+}
+var pauseAsync = function pauseAsync(wait) {
+    if (typeof wait === 'undefined') {
+        var max = 750, min = 500; 
+        wait = Math.floor(Math.random() * (max - min + 1) + min);
+    }
+
+    return new Promise(function (fulfill) {
+        setTimeout(function () {
             fulfill();
         }, wait);
-    })
+    });
 };
