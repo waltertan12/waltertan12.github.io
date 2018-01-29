@@ -1,59 +1,61 @@
-'use strict';
-var typePhrase = function typePhrase(id, phrase, pause) {
-    var element = document.getElementById(id);
+var Typing = (function () {
+    'use strict';
 
-    return new Promise (function (fulfill, reject) {
-        if (!element) reject();
-        if (!pause) pause = 0;
-
-        var len = phrase.length,
-            timeOut,
-            letter = 0;
-
-        element.textContent = '|';
-
-        var _typePhrase = function _typePhrase() {
-            var humanize = Math.round(Math.random() * (100 - 30)) + 30;
-
-            timeOut = setTimeout(function () {
-                letter++;
-                var type = phrase.substring(0, letter);
-                element.textContent = type + '|';
-                _typePhrase();
-
-                if (letter === len) {
-                    // remove the '|'
-                    element.textContent = element.textContent.slice(0, -1);
-                    clearTimeout(timeOut);
-                    setTimeout(function () {
+    var randomize = function randomize(min, max) {
+        return Math.floor(Math.random() * (max - min + 1) + min);
+    };
+    
+    var type = function type(id, phrase, pause) {
+        var element = document.getElementById(id);
+    
+        return new Promise (function (fulfill, reject) {
+            if (!element) {
+                reject('Cannot find element with id ' + id);
+            }
+            if (!pause) {
+                pause = 0;
+            }
+    
+            var len = phrase.length;
+            var letter = 0;
+            var shouldStop = false;
+            var keyListener = document.addEventListener('keypress', function (event) {
+                shouldStop = true;
+                document.removeEventListener('keypress', keyListener);
+            });
+            var timeOut;
+    
+            element.textContent = '|';
+    
+            var recurse = function recurse() {
+                timeOut = setTimeout(function () {
+                    if (shouldStop) {
+                        element.textContent = phrase;
                         return fulfill();
-                    }, pause);
-                }
+                    }
 
-            }, humanize);
-        };
+                    var currentPhrase = phrase.substring(0, ++letter);
+                    element.textContent = currentPhrase + '|';
+                    recurse();
+    
+                    if (letter === len) {
+                        // remove the '|'
+                        element.textContent = element.textContent.slice(0, -1);
+                        clearTimeout(timeOut);
+                        setTimeout(function () {
+                            return fulfill();
+                        }, pause);
+                    }
+    
+                }, randomize(30, 100));
+            };
+    
+            recurse();
+        });
+    };
 
-        _typePhrase();
+    return Object.freeze({
+        type: type,        
+        randomize: randomize
     });
-};
-
-var pauseSync = function pauseSync(wait) {
-    if (typeof wait === 'undefined') {
-        var max = 750, min = 500; 
-        wait = Math.floor(Math.random() * (max - min + 1) + min);
-    }
-
-   return wait;
-}
-var pauseAsync = function pauseAsync(wait) {
-    if (typeof wait === 'undefined') {
-        var max = 750, min = 500; 
-        wait = Math.floor(Math.random() * (max - min + 1) + min);
-    }
-
-    return new Promise(function (fulfill) {
-        setTimeout(function () {
-            fulfill();
-        }, wait);
-    });
-};
+})();
