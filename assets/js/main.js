@@ -1,10 +1,25 @@
 ;(function () {
-    'use strict';
-
     var links = document.getElementById('links');
     var contacts = document.getElementById('contacts');
+    var waitOrKeypress = function waitOrKeypress() {
+        return new Promise(function (fulfill) {
+            var keyListener;
+            var timeout = setTimeout(function () {
+                document.removeEventListener('keypress', keyListener);
+                fulfill();
+            }, 1000);
 
-    Typing.type('hi', 'Hi, I\'m Walter Tan!', Typing.randomize(500, 750))
+            keyListener = function (event) {
+                clearTimeout(timeout);
+                document.removeEventListener('keypress', keyListener);
+                fulfill();                
+            };
+            document.addEventListener('keypress', keyListener);
+        });
+    };
+
+    Typing
+        .type('hi', 'Hi, I\'m Walter Tan!', Typing.randomize(500, 750))
         .then(function () {
             return Typing.type('about-me', 'I write things for the web', Typing.randomize(500, 750));
         })
@@ -17,18 +32,7 @@
                 return fulfill();
             });
         })
-        .then(function () {
-            return new Promise(function (fulfill) {
-                var keyListener = document.addEventListener('keypress', function (event) {
-                    document.removeEventListener('keypress', keyListener);
-                    return fulfill();                
-                });
-
-                setTimeout(function () {
-                    fulfill();
-                }, 1000);
-            });
-        })
+        .then(waitOrKeypress)
         .then(function () {
             return Typing.type('contacts-intro', 'And here\'s my contact information:');
         })
@@ -38,18 +42,7 @@
                 return fulfill();
             });
         })
-        .then(function () {
-            return new Promise(function (fulfill) {
-                var keyListener = document.addEventListener('keypress', function (event) {
-                    document.removeEventListener('keypress', keyListener);
-                    return fulfill();                
-                });
-
-                setTimeout(function () {
-                    fulfill();
-                }, 1000);
-            });
-        })
+        .then(waitOrKeypress)
         .then(function () {
             return Typing.type('outro', 'Hope to hear from you soon :)');
         })
